@@ -4,70 +4,149 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prabhanshu Aggarwal | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: #0f172a;
-      color: #f8fafc;
-      line-height: 1.6;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #f1f5f9;
     }
     header {
-      background: #1e293b;
-      padding: 2rem;
+      background: rgba(15, 23, 42, 0.95);
+      padding: 5rem 2rem 3rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, #38bdf8 5%, transparent 10%);
+      background-size: 20% 20%;
+      animation: animate 25s linear infinite;
+      opacity: 0.03;
+    }
+    @keyframes animate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     header h1 {
-      font-size: 2.5rem;
-      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      color: #38bdf8;
+      animation: glow 2s ease-in-out infinite alternate;
     }
-    header p {
-      font-size: 1.1rem;
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #38bdf8; }
+      to { text-shadow: 0 0 20px #0ea5e9, 0 0 30px #38bdf8; }
+    }
+    header p span#typed {
       color: #94a3b8;
+      font-size: 1.3rem;
+      font-weight: 500;
+      display: inline-block;
+      margin-top: 0.5rem;
     }
     section {
-      padding: 2rem 5%;
-      max-width: 1000px;
+      padding: 3rem 5%;
+      max-width: 1100px;
       margin: auto;
     }
     h2 {
+      font-size: 2rem;
       color: #38bdf8;
-      margin-bottom: 1rem;
+      border-bottom: 2px solid #334155;
+      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    h2::after {
+      content: "✨";
+      position: absolute;
+      right: -1.5rem;
+      top: 0;
+      font-size: 1.5rem;
     }
     .skills, .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
     }
     .card {
       background: #1e293b;
+      border-left: 5px solid #38bdf8;
       padding: 1.5rem;
       border-radius: 1rem;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeInUp {
+      0% { transform: translateY(20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(56,189,248,0.3);
+    }
+    .card strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      color: #cbd5e1;
     }
     a {
       color: #38bdf8;
       text-decoration: none;
     }
+    .cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .cta a {
+      background: #38bdf8;
+      color: #0f172a;
+      padding: 0.75rem 2rem;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+      text-decoration: none;
+    }
+    .cta a:hover {
+      background: #0ea5e9;
+    }
     footer {
       text-align: center;
-      padding: 1rem;
-      color: #94a3b8;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #64748b;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Prabhanshu Aggarwal</h1>
-    <p>Software Developer | AI Engineer | Cloud Enthusiast</p>
+    <p><span id="typed"></span></p>
   </header>
 
   <section>
     <h2>About Me</h2>
     <p>
-      I'm a passionate software engineer based in Ontario, Canada, with a strong background in Python, cloud technologies, and distributed systems. I love building robust, scalable tools that solve real-world problems — whether it's automating workflows, optimizing data pipelines, or deploying machine learning models.
+      Welcome to my digital playground. I'm a software developer and AI engineer based in Ontario, Canada — passionate about solving real-world problems with smart, scalable, and creative tech solutions. Whether it's deploying ML models, building cloud-native tools, or automating data workflows, I thrive at the intersection of innovation and impact.
     </p>
   </section>
 
@@ -75,45 +154,59 @@
     <h2>Skills</h2>
     <div class="skills">
       <div class="card">Python, Java, C++</div>
-      <div class="card">AWS, GitLab CI/CD, Docker</div>
+      <div class="card">AWS, GitHub Actions, Docker, Terraform</div>
       <div class="card">Apache Spark, Kafka, Databricks</div>
-      <div class="card">MongoDB, PostgreSQL, SQL</div>
-      <div class="card">TensorFlow, PyTorch, Scikit-learn</div>
-      <div class="card">Tableau, NLP, YOLO</div>
+      <div class="card">SQL, PostgreSQL, MongoDB</div>
+      <div class="card">TensorFlow, PyTorch, HuggingFace</div>
+      <div class="card">LangChain, Streamlit, FastAPI</div>
     </div>
   </section>
 
   <section>
-    <h2>Projects</h2>
+    <h2>Highlighted Projects</h2>
     <div class="projects">
       <div class="card">
-        <strong>Offensive Speech Detection</strong>
-        <p>ML model using BERT & LlaMa to detect harmful content in video transcriptions.</p>
+        <strong>⚡ Offensive Speech Detection</strong>
+        <p>BERT + LLaMA powered model to flag harmful speech from live video transcriptions.</p>
       </div>
       <div class="card">
-        <strong>Chat Assistant with RAG</strong>
-        <p>A smart Wikipedia-powered assistant using OpenAI + Retrieval Augmented Generation (RAG).</p>
+        <strong>🤖 Chat Assistant with RAG</strong>
+        <p>Retrieval-Augmented Generation with OpenAI & Wikipedia to build a helpful assistant.</p>
       </div>
       <div class="card">
-        <strong>Attendance + Emotion Detection</strong>
-        <p>Real-time attendance and mood tracking via webcam using YOLOv5.</p>
+        <strong>🎯 Emotion-based Attendance</strong>
+        <p>Computer Vision app using YOLOv5 to log attendance and detect emotions live.</p>
       </div>
       <div class="card">
-        <strong>Engineering Goals App</strong>
-        <p>ML-powered web app for personalized career advice, built using Django.</p>
+        <strong>📈 Engineering Goals Advisor</strong>
+        <p>Custom ML engine with Django backend to guide engineers in career growth paths.</p>
       </div>
     </div>
   </section>
 
+  <section class="cta">
+    <a href="/Prabhanshu_Aggarwal_Resume.pdf" target="_blank">📄 View My Resume</a>
+  </section>
+
   <section>
-    <h2>Contact</h2>
+    <h2>Connect with Me</h2>
     <p>Email: <a href="mailto:prabhanshuaggarwal@gmail.com">prabhanshuaggarwal@gmail.com</a></p>
     <p>LinkedIn: <a href="https://www.linkedin.com/in/prabhanshuaggarwal">linkedin.com/in/prabhanshuaggarwal</a></p>
     <p>GitHub: <a href="https://github.com/prabhanshu-aggarwal">github.com/prabhanshu-aggarwal</a></p>
   </section>
 
   <footer>
-    &copy; 2025 Prabhanshu Aggarwal. All rights reserved.
+    &copy; 2025 Prabhanshu Aggarwal. Crafted with code and caffeine.
   </footer>
+
+  <script>
+    new Typed("#typed", {
+      strings: ["AI Engineer", "Cloud Developer", "ML Researcher", "Open Source Contributor"],
+      typeSpeed: 60,
+      backSpeed: 30,
+      backDelay: 2000,
+      loop: true
+    });
+  </script>
 </body>
 </html>
