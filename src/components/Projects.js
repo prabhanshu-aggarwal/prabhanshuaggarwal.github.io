@@ -189,8 +189,8 @@ const FloatingParticle = styled(motion.div)`
 const Projects = ({ theme }) => {
   const [loadedImages, setLoadedImages] = useState({});
 
-  const projects = [
-    {
+const projects = [
+  {
       title: "V2Ts with Offensive Speech Detection",
       description: "Advanced video-to-text conversion system with real-time offensive speech detection using BERT and LLaMA models.",
       image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",

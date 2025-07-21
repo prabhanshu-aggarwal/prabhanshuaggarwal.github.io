@@ -32,6 +32,32 @@ const StoryContent = styled.div`
   width: 100%;
 `;
 
+const VideoWrapper = styled.div`
+  width: 100%;
+  margin-bottom: 2.5rem;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  background: linear-gradient(135deg, #0a0a0a 0%, #f59e0b 100%);
+  position: relative;
+  aspect-ratio: 16/9;
+  border: 3px solid #f59e0b;
+  animation: borderGlow 3s linear infinite;
+  @keyframes borderGlow {
+    0% { border-color: #f59e0b; }
+    50% { border-color: #6366f1; }
+    100% { border-color: #f59e0b; }
+  }
+`;
+
+const StyledVideo = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  display: block;
+`;
+
 const StoryText = styled(motion.div)`
   h2 {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
@@ -56,8 +82,6 @@ const StoryText = styled(motion.div)`
     font-weight: 600;
   }
 `;
-
-
 
 const StoryTimeline = styled(motion.div)`
   margin-top: 3rem;
@@ -112,10 +136,15 @@ const TimelineContent = styled.div`
 `;
 
 const MyStory = ({ theme }) => {
-
   return (
     <StoryContainer theme={theme}>
       <StoryContent>
+        <VideoWrapper theme={theme}>
+          <StyledVideo controls poster="/prabhanshu1.jpg">
+            <source src="/1718520445560.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </StyledVideo>
+        </VideoWrapper>
         <StoryText
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -181,8 +210,6 @@ const MyStory = ({ theme }) => {
             </TimelineItem>
           </StoryTimeline>
         </StoryText>
-
-
       </StoryContent>
     </StoryContainer>
   );
