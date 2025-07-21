@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FiMail, FiPhone, FiMapPin, FiSend, FiCheck, FiX } from 'react-icons/fi';
+import emailjs from '@emailjs/browser';
 
 const glow = keyframes`
   0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 240, 0.3); }
@@ -367,6 +368,8 @@ const Contact = ({ theme }) => {
     triggerOnce: true,
   });
 
+  const formRef = useRef();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -416,25 +419,32 @@ const Contact = ({ theme }) => {
     setSubmitStatus(null);
 
     try {
-      // Simulate API call - replace with actual email service
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const result = await emailjs.sendForm(
+        'service_wcuc49y', // Your Service ID
+        'template_v4xaynt', // Your Template ID
+        formRef.current,
+        'DcjtlUrUIDJm6UrYH' // Your Public Key
+      );
       
-      // For demo purposes, we'll simulate success
-      // In production, integrate with services like EmailJS, Formspree, or your own backend
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus(null);
-      }, 5000);
+      if (result.status === 200) {
+        setSubmitStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus(null);
+        }, 5000);
+      } else {
+        throw new Error('Failed to send email');
+      }
       
     } catch (error) {
+      console.error('EmailJS Error:', error);
       setSubmitStatus('error');
       
       // Reset error message after 5 seconds
@@ -550,6 +560,7 @@ const Contact = ({ theme }) => {
           </ContactInfo>
 
           <ContactForm
+            ref={formRef}
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
