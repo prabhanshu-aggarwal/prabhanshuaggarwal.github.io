@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiChevronUp, FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
