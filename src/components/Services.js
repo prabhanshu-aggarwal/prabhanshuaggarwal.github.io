@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { FiCode, FiGlobe, FiSmartphone, FiDatabase, FiCloud, FiZap } from 'react-icons/fi';
 
 const ServicesContainer = styled.div`
@@ -289,10 +290,11 @@ const Services = ({ theme }) => {
             Let's discuss your ideas and create something amazing together. I'm here to help bring your vision to life.
           </CTAText>
           <CTAButton
+            as={Link}
+            to="/contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             theme={theme}
-            onClick={() => window.location.href = '/contact'}
           >
             Get In Touch
           </CTAButton>
